@@ -1,18 +1,36 @@
 import React, { useState } from 'react'
-import { TodoForm } from '../TodoForm/TodoForm'
+import { TodoForm } from './TodoForm'
 import { v4 as uuidv4 } from 'uuid';
-uuidv4();
+import { Todo } from './Todo';
+
 
 export const TodoWrapper = () => {
-    const [todos, setTodos] = useState([]);
-    const addTodo = todo => {
-        setTodos([...todos, { id: uuidv4(), task: todo, isCompleted: false, isEdited: false }]);
-        console.log(todos);
-    }
+  const [todos, setTodos] = useState([]);
+
+
+  const addTodo = (todo) => {
+    setTodos([
+      ...todos,
+      { id: uuidv4(), task: todo, completed: false, isEditing: false },
+    ]);
+
+  }
+
+const toggleComplete = (id) => {
+  setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo));
+};
+
+  console.log(todos)
   return (
-    <TodoForm addTodo={addTodo}/>
+    <div className="">
+      <TodoForm addTodo={addTodo} />
+      {todos.map((todo, index)=> (
+        <Todo task={todo} key={index} toggleComplete={toggleComplete}/>
+      ))}
+    </div>
   )
 }
+
 
 
 
