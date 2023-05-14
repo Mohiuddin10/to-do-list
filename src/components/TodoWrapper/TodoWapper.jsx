@@ -11,8 +11,12 @@ export const TodoWapper = () => {
     console.log(todos);
   };
   
-const toggleComplete = (id) => {
-  setTodos(todos.map((todo) => todo.id === id ? {...todo, completed: !todo.completed } : todo));
+const toggleComplete = id => {
+  setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo));
+}
+
+const deleteTodo = id => {
+  setTodos(todos.filter(todo => todo.id !== id));
 }
 
   return (
@@ -23,6 +27,7 @@ const toggleComplete = (id) => {
           key={todo.id}
           task={todo}
           toggleComplete={toggleComplete}
+          deleteTodo={deleteTodo}
          />)
         }
     </div>
