@@ -19,6 +19,10 @@ const deleteTodo = (id) => {
   setTodos(todos.filter(todo => todo.id !== id));
 }
 
+const editTodo = (id) => {
+  setTodos(todos.map(todo => todo.id === id ? {...todo, isEdited: !todo.Edited} : todo));
+};
+
   return (
     <div className="TodoWrapper">
         <TodoForm addTodo={addTodo} />
@@ -28,6 +32,7 @@ const deleteTodo = (id) => {
           task={todo}
           toggleComplete={toggleComplete}
           deleteTodo={deleteTodo}
+          editTodo={editTodo}
          />)
         }
     </div>
